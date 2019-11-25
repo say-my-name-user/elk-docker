@@ -1,0 +1,31 @@
+version: '2'
+
+volumes:
+  esdata:
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.1
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.7.1
+    ports: 
+      - "5601:5601"
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.4.2
+    ports:
+      - "5046:5046"
+    volumes:
+      - ./config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      - ./config/pipelines:/usr/share/logstash/config/pipelines
+      - C:\OSPanel\userdata\logs:/var/log
+    depends_on:
+      - elasticsearch
+      - kibana

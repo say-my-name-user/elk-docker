@@ -1,8 +1,12 @@
-- pipeline.id: test_file_access_logs
+- pipeline.id: test_file_input
   pipeline.workers: 1
   pipeline.batch.size: 1
-  path.config: "./config/pipelines/file_access_logs.conf"
-- pipeline.id: test_http_input_logs
+  path.config: "./config/pipelines/file_input.conf"
+- pipeline.id: test_http_input
   pipeline.workers: 1
   pipeline.batch.size: 1
-  path.config: "./config/pipelines/http_input_logs.conf"
+  path.config: "./config/pipelines/http_input.conf"
+- pipeline.id: test_jdbc_input
+  pipeline.workers: 1
+  pipeline.batch.size: 1
+  path.config: "./config/pipelines/jdbc_input.conf"
